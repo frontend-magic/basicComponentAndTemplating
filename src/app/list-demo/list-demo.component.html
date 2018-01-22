@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let ev of events">
+    {{ev.name}}
+    <button (click)="delete(ev.id)" >törlés</button>
+  </li>
+</ul>
