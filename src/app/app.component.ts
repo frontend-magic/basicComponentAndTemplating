@@ -6,10 +6,30 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'Netacademia a tuti';
   events = ['sziget', 'efott', 'fezen', 'szin'];
   show = true;
   inputContent: string;
+
+  egyenek =
+    [
+      {
+        'id': 1,
+        'name': 'Tamás'
+      },
+      {
+        'id': 2,
+        'name': 'Géza'
+      }
+
+      ,
+      {
+        'id': 3,
+        'name'
+          :
+          'Jónás'
+      }
+    ];
 
   toggle() {
     this.show = !this.show;
