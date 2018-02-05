@@ -1,6 +1,20 @@
 <ul>
   <li *ngFor="let ev of events">
+     <img [src]="ev.pic" alt="" height="50px" width="50px">
     {{ev.name}}
     <button (click)="delete(ev.id)" >törlés</button>
   </li>
 </ul>
+
+<div>
+  <label for="newevent">Új esemény címe</label>
+<input type="text" #newEventInput id="newevent">
+</div>
+<div>
+  <label for="newpic">Eseményhez tartozó kép</label>
+  <input type="text" #newEventPic id="newpic">
+</div>
+<button (click)="add(newEventInput)">add</button>
+<pre>
+  {{events | json}}
+</pre>
