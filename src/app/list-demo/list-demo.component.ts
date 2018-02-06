@@ -9,16 +9,7 @@ import {EventModel} from '../event/eventmodel';
 
 export class ListDemoComponent {
   events: EventModel[];
-
-  add(newEventInput: HTMLInputElement, newEventPic: HTMLInputElement) {
-    const maxId = this.events.reduce((x, y) => x.id > y.id ? x : y).id;
-    this.events = [...this.events, new EventModel(maxId + 1, newEventInput.value, newEventPic.value)];
-    newEventInput.value = '';
-  }
-
-  delete(id: number) {
-    this.events = this.events.filter((ev: EventModel) => ev.id !== id);
-  }
+  modifyEvent: EventModel;
 
   constructor() {
     this.events = [
@@ -38,7 +29,44 @@ export class ListDemoComponent {
         pic: 'http://www.fazemag.de/wp-content/uploads/2016/05/l13426-loveparade-logo-12605.png'
       }
     ];
-    console.log('megjött a list-demo konstruktor');
+    this.modifyEvent = new EventModel('');
+  }
+
+  save(newEventInput: HTMLInputElement, newEventPic: HTMLInputElement) {
+    // itt megtudjuk, hogy új elemet akarunk létrehozni id=0
+    if (this.modifyEvent.id === 0) {
+      const maxId = this.events.reduce((x, y) => x.id > y.id ? x : y).id;
+      this.events = [...this.events, new EventModel(newEventInput.value, maxId + 1, newEventPic.value)];
+    } else {
+      // itt tudjuk, hogy edit szakasz van, azaz meg kell keresni a megfelelo elemet az id alapjan
+      this.events = this.events.map((ev) => {
+        if (ev.id === this.modifyEvent.id) {
+          // itt tudjuk, hogy ezt az elemet kell szerkeszteni
+          return {
+            id: ev.id,
+            name: newEventInput.value,
+            pic: newEventPic.value
+          };
+        } else {
+          // itt tudjuk, hogy nem akarunk modositani
+          return ev;
+        }
+      });
+
+      // takaritsunk fel magunk utan
+      this.modifyEvent = new EventModel('');
+    }
+
+    newEventInput.value = '';
+    newEventPic.value = '';
+  }
+
+  edit(id: number) {
+    this.modifyEvent = this.events.filter((ev) => ev.id === id) [0];
+  }
+
+  delete(id: number) {
+    this.events = this.events.filter((ev: EventModel) => ev.id !== id);
   }
 }
 

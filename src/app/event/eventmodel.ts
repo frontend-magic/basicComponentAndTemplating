@@ -1,11 +1,11 @@
 export class EventModel {
-  id: number;
   name: string;
+  id: number;
   pic?: string;
 
-  constructor(id = 0, name = '', pic = '') {
-    this.id = id;
+  constructor(name = '', id = 0, pic = '') {
     this.name = name;
+    this.id = id;
     this.pic = pic;
   }
 }
