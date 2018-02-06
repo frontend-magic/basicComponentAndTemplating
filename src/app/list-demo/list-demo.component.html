@@ -1,7 +1,7 @@
 <ul>
   <li *ngFor="let ev of events">
      <img [src]="ev.pic" alt="" height="50px" width="50px">
-    {{ev.name}}
+    {{ev.name | uppercase | sajatPipe:3 }}
     <button (click)="edit(ev.id)">szerkesztés</button>
     <button (click)="delete(ev.id)" >törlés</button>
   </li>
